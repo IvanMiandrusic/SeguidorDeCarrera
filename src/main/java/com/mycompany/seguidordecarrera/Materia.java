@@ -5,7 +5,8 @@
  */
 package com.mycompany.seguidordecarrera;
 
-import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
 
 
 /**
@@ -18,9 +19,25 @@ public class Materia {
     private String nivel;
     private String notas[] = new String[7];
     private int estado = 0;
-    private LinkedList correlativas = new LinkedList();
+    private ArrayList<Materia> correlativas;
     private boolean puede = true;
 
+    
+    public Materia(String unCodigo, String unNombre, String unNivel) {
+    this.setNombre(unNombre);
+    this.setNivel(unNivel);
+    this.setCodigo(unCodigo);
+    this.correlativas = new ArrayList();
+    }
+    
+    public ArrayList<Materia> getCorrelativas(){
+        return this.correlativas;
+    }
+    
+    public void AgregarCorrelativa(Materia unaMat){
+        this.correlativas.add(unaMat);
+    }
+    
     public int getId() {
         return id;
     }
@@ -57,11 +74,7 @@ public class Materia {
         this.estado = estado;
     }
 
-    public LinkedList getCorrelativas() {
-        return correlativas;
-    }
-
-    public void setCorrelativas(LinkedList correlativas) {
+    public void setCorrelativas(ArrayList<Materia> correlativas) {
         this.correlativas = correlativas;
     }
 
@@ -83,13 +96,6 @@ public class Materia {
         this.codigo = codigo;
     }
 
-    public Materia(String unCodigo, String unNombre, String unNivel) {
-    this.setNombre(unNombre);
-    this.setNivel(unNivel);
-    this.setCodigo(unCodigo);
-
-
-    }
   
                        
 }

@@ -6,7 +6,12 @@
 package com.mycompany.seguidordecarrera.panels;
 
 import com.mycompany.seguidordecarrera.Materia;
-import java.util.LinkedList;
+import com.mycompany.seguidordecarrera.Seguidor;
+import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,11 +19,16 @@ import java.util.LinkedList;
  */
 public class matModifPanel extends javax.swing.JFrame {
 
-   Materia matActual;
-   AdminPanel admPanel; 
-   
+    ArrayList<Materia> newCorrelat = new ArrayList();
+    ArrayList<Materia> mats = new ArrayList();
+    Materia matActual;
+    AdminPanel admPanel;
+    
+    
+
     public matModifPanel() {
         initComponents();
+        agregarRadioButtons();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
@@ -32,24 +42,14 @@ public class matModifPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
-        buttonGroup5 = new javax.swing.ButtonGroup();
-        buttonGroup6 = new javax.swing.ButtonGroup();
-        buttonGroup7 = new javax.swing.ButtonGroup();
-        buttonGroup8 = new javax.swing.ButtonGroup();
-        buttonGroup9 = new javax.swing.ButtonGroup();
+        gbModPanel = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lbNommat = new javax.swing.JLabel();
         cbCorrelativas = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         btnAddCorrelativa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbCorrelativas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -58,24 +58,25 @@ public class matModifPanel extends javax.swing.JFrame {
         txtModCodigo = new javax.swing.JTextField();
         txtModNombre = new javax.swing.JTextField();
         cbModNivel = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-
-        jCheckBox1.setText("jCheckBox1");
-
-        jCheckBox2.setText("jCheckBox2");
+        rbFirma = new javax.swing.JRadioButton();
+        rbAprob = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbNommat.setText("jLabel1");
 
-        cbCorrelativas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCorrelativas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
 
         jLabel1.setText("Correlativa:");
 
         btnAddCorrelativa.setText("Agregar");
+        btnAddCorrelativa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCorrelativaActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbCorrelativas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -83,7 +84,7 @@ public class matModifPanel extends javax.swing.JFrame {
                 "Nivel", "Materia", "Codigo"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbCorrelativas);
 
         jLabel2.setText("Nombre");
 
@@ -111,14 +112,14 @@ public class matModifPanel extends javax.swing.JFrame {
 
         cbModNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"1", "2", "3", "4", "5" }));
 
-        jRadioButton1.setText("Firma");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        rbFirma.setText("Firma");
+        rbFirma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rbFirmaActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("Aprobada");
+        rbAprob.setText("Aprobada");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,9 +145,9 @@ public class matModifPanel extends javax.swing.JFrame {
                                         .addComponent(txtModCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                                         .addComponent(cbModNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(18, 18, 18)
-                                    .addComponent(jRadioButton1)
+                                    .addComponent(rbFirma)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jRadioButton2)
+                                    .addComponent(rbAprob)
                                     .addGap(22, 22, 22)
                                     .addComponent(btnAddCorrelativa))
                                 .addComponent(btnModGuardar)))
@@ -183,8 +184,8 @@ public class matModifPanel extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(cbCorrelativas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAddCorrelativa)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))))
+                            .addComponent(rbFirma)
+                            .addComponent(rbAprob))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
@@ -210,36 +211,72 @@ public class matModifPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void datosDeCampos(Materia unaMat, AdminPanel unPanel) {
-        matActual = unaMat; 
+        matActual = unaMat;
         admPanel = unPanel;
-        txtModCodigo.setText(unaMat.getCodigo());  
+        txtModCodigo.setText(unaMat.getCodigo());
         txtModNombre.setText(unaMat.getNombre());
         cbModNivel.addItem(unaMat.getNivel());
         cbModNivel.setSelectedItem(unaMat.getNivel());
+        cbCorrelativas.setSelectedItem("Seleccione una Correlativa");
+        mats = unPanel.getMatList();
+        Materia element;
+        Iterator<Materia> it = mats.iterator();
+        while (it.hasNext()) {
+            element = it.next();
+            cbCorrelativas.addItem(element.getNombre());
+        }
 
     }
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rbFirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFirmaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rbFirmaActionPerformed
 
     private void btnModGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModGuardarActionPerformed
-        if(matActual.getNombre() != txtModNombre.getText() || matActual.getCodigo() != txtModCodigo.getText() || matActual.getNivel() != cbModNivel.getSelectedItem()){
+        if (matActual.getNombre() != txtModNombre.getText() || matActual.getCodigo() != txtModCodigo.getText() || matActual.getNivel() != cbModNivel.getSelectedItem()) {
             matActual.setCodigo(txtModCodigo.getText());
-            matActual.setNombre(txtModCodigo.getText());
+            matActual.setNombre(txtModNombre.getText());
             matActual.setNivel(cbModNivel.getSelectedItem().toString());
-            
-            
+            if(this.newCorrelat != null){
+            newCorrelat.stream().forEach(m->matActual.AgregarCorrelativa(m));     
+            }
+            admPanel.actualizarTabla(matActual);
+            dispose();
         }
     }//GEN-LAST:event_btnModGuardarActionPerformed
 
     private void btnModCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModCerrarActionPerformed
-        
+
     }//GEN-LAST:event_btnModCerrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnAddCorrelativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCorrelativaActionPerformed
+       DefaultTableModel tbAux = (DefaultTableModel) tbCorrelativas.getModel();
+       Materia element;
+       Iterator<Materia> it = mats.iterator();
+       while(it.hasNext()){
+           element = it.next();
+           ArrayList<Materia> correlat = element.getCorrelativas();
+           if(element.getNombre() == cbCorrelativas.getSelectedItem().toString()){
+              if((this.newCorrelat.stream().filter(c->c.getNombre() == cbCorrelativas.getSelectedItem().toString()).collect(Collectors.toList())).size() > 0 || (correlat.stream().filter(c->c.getNombre() == cbCorrelativas.getSelectedItem().toString()).collect(Collectors.toList())).size() > 0 ){
+                   Seguidor.lanzarAlerta(cbCorrelativas.getSelectedItem().toString() + " ya forma parte de las correlativas de " + this.matActual.getNombre());
+             }else{
+               String[] fila = new String[3];
+               fila[0] = element.getCodigo();
+               fila[1] = element.getNombre();
+               fila[2] = element.getNivel();
+               tbAux.addRow(fila);
+               this.newCorrelat.add(element);
+               }
+           }else{}
+       }
+           
+    }//GEN-LAST:event_btnAddCorrelativaActionPerformed
+
+    public void agregarRadioButtons() {
+        gbModPanel.add(rbFirma);
+        gbModPanel.add(rbAprob);
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -272,33 +309,24 @@ public class matModifPanel extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCorrelativa;
     private javax.swing.JButton btnModCerrar;
     private javax.swing.JButton btnModGuardar;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.ButtonGroup buttonGroup5;
-    private javax.swing.ButtonGroup buttonGroup6;
-    private javax.swing.ButtonGroup buttonGroup7;
-    private javax.swing.ButtonGroup buttonGroup8;
-    private javax.swing.ButtonGroup buttonGroup9;
     private javax.swing.JComboBox<String> cbCorrelativas;
     private javax.swing.JComboBox<String> cbModNivel;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.ButtonGroup gbModPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbNommat;
+    private javax.swing.JRadioButton rbAprob;
+    private javax.swing.JRadioButton rbFirma;
+    private javax.swing.JTable tbCorrelativas;
     private javax.swing.JTextField txtModCodigo;
     private javax.swing.JTextField txtModNombre;
     // End of variables declaration//GEN-END:variables

@@ -1,98 +1,8 @@
 [
   {
     "id": 1,
-    "nombre": "a",
+    "nombre": "Chau",
     "nivel": "1",
-    "notas": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
-    ],
-    "estado": 0,
-    "correlativas": [],
-    "puede": true,
-    "codigo": "a"
-  },
-  {
-    "id": 2,
-    "nombre": "as",
-    "nivel": "1",
-    "notas": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
-    ],
-    "estado": 0,
-    "correlativas": [],
-    "puede": true,
-    "codigo": "as"
-  },
-  {
-    "id": 3,
-    "nombre": "asd",
-    "nivel": "1",
-    "notas": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
-    ],
-    "estado": 0,
-    "correlativas": [],
-    "puede": true,
-    "codigo": "asd"
-  },
-  {
-    "id": 4,
-    "nombre": "asdf",
-    "nivel": "1",
-    "notas": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
-    ],
-    "estado": 0,
-    "correlativas": [],
-    "puede": true,
-    "codigo": "asdf"
-  },
-  {
-    "id": 5,
-    "nombre": "ss",
-    "nivel": "4",
-    "notas": [
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
-    ],
-    "estado": 0,
-    "correlativas": [],
-    "puede": true,
-    "codigo": "ddd"
-  },
-  {
-    "id": 6,
-    "nombre": "ssaaaa",
-    "nivel": "4",
     "notas": [
       null,
       null,
@@ -105,6 +15,6 @@
     "estado": 0,
     "correlativas": [],
     "puede": true,
-    "codigo": "sss"
+    "codigo": "Hola"
   }
 ]

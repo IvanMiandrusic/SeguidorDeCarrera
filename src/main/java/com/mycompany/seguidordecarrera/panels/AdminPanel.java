@@ -18,8 +18,10 @@ import javax.swing.table.DefaultTableModel;
 import com.mycompany.seguidordecarrera.Seguidor;
 import com.mycompany.seguidordecarrera.Seguidor;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
+import java.util.List;
 
 /**
  *
@@ -27,7 +29,7 @@ import jdk.nashorn.internal.ir.debug.JSONWriter;
  */
 public class AdminPanel extends javax.swing.JFrame {
 
-    public LinkedList materias = new LinkedList();
+    ArrayList<Materia> materias = new ArrayList();
     File fichero = new File("Datos\\datos.json");
     Materia materia;
     String datos[];
@@ -35,7 +37,6 @@ public class AdminPanel extends javax.swing.JFrame {
     public AdminPanel() {
         initComponents();
         leerMaterias();
-        cargarMaterias();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
@@ -198,23 +199,24 @@ public class AdminPanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void cargarMaterias() {
+    public void actualizarTabla(Materia unamat){
         DefaultTableModel tbAdmin = (DefaultTableModel) tbMatAdmin.getModel();
-        Iterator<Materia> it = materias.iterator();
-        Materia element;
-        while (it.hasNext()) {
-            element = it.next();
-            String[] fila = new String[4];
-            fila[0] = element.getId()+"";
-            fila[1] = element.getCodigo();
-            fila[2] = element.getNombre();
-            fila[3] = (element.getNivel());
-            tbAdmin.addRow(fila);
-
-        }
-        return;
+         String[] fila = new String[4];
+                fila[0] = unamat.getId() + "";
+                fila[1] = unamat.getCodigo();
+                fila[2] = unamat.getNombre();
+                fila[3] = unamat.getNivel() + "";
+                int selectedRow = tbMatAdmin.getSelectedRow();
+                tbAdmin.setValueAt( unamat.getCodigo() ,selectedRow , 1);
+                tbAdmin.setValueAt( unamat.getNombre(),selectedRow , 2);
+                tbAdmin.setValueAt( unamat.getNivel(),selectedRow , 3);
+          
     }
-
+    
+    public ArrayList<Materia> getMatList(){
+        return this.materias;
+    }
+   
     public void leerMaterias() {
 
         try {
@@ -229,23 +231,23 @@ public class AdminPanel extends javax.swing.JFrame {
                 fila[2] = mats[i].getNombre();
                 fila[3] = (mats[i].getNivel()) + "";
                 tbAdmin.addRow(fila);
-                this.materias.add(mats[i]);
-                // crearMateria(mats[i]);
+                this.agregarMat(mats[i]);
+          
             }
 
         } catch (Exception e) {
         }
     }
 
-    public void guardarMateria(LinkedList unasMat) {
+    public void guardarMateria(ArrayList<Materia> unasMat) {
 
         try {
             BufferedWriter bw;//Instancia de BW 
             bw = new BufferedWriter(new FileWriter(fichero));//Inicialización de "BW" con "FW" como parámetro con "fichero" como parámetro
             Iterator<Materia> it = materias.iterator();
             Materia element;
-            if (materias.size() == 0) {
-                return;
+            if (this.materias == null) {
+             
             } else {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 String s = gson.toJson(materias);
@@ -256,6 +258,10 @@ public class AdminPanel extends javax.swing.JFrame {
             Seguidor.lanzarAlerta("No se pudieron guardar los datos!n" + e.getMessage());
         }
 
+    }
+    
+    public void agregarMat(Materia unaMat){
+        this.materias.add(unaMat);
     }
 
 
@@ -271,18 +277,17 @@ public class AdminPanel extends javax.swing.JFrame {
                 String codigo = mat.getCodigo();
                 String id = mat.getId() + "";
                 String[] fila = new String[4];
-                fila[0] = id;
                 fila[1] = codigo;
                 fila[2] = nombre;
                 fila[3] = nivel;
-                Iterator<Materia> it = materias.iterator();
                 Materia element;
-                if (materias.size() == 0) {
+                if (this.materias == null) {
                     mat.setId(1);
-                    this.materias.add(mat);
+                    this.agregarMat(mat);
                     tbAdmin.addRow(fila);
 
                 } else {
+                    Iterator<Materia> it = materias.iterator();
                     while (it.hasNext()) {
                         element = it.next();
                         String nombre1 = element.getNombre();
@@ -295,7 +300,8 @@ public class AdminPanel extends javax.swing.JFrame {
                         }
                     }
                     mat.setId(materias.size() + 1);
-                    this.materias.add(mat);
+                    this.agregarMat(mat);
+                    fila[0] = mat.getId()+"";
                     tbAdmin.addRow(fila);
 
                 }
@@ -341,6 +347,7 @@ public class AdminPanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnModMatActionPerformed
     }
+    
 
     /**
      * @param args the command line arguments
