@@ -7,6 +7,7 @@ package com.mycompany.seguidordecarrera;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -19,7 +20,7 @@ public class Materia {
     private String nivel;
     private String notas[] = new String[7];
     private int estado = 0;
-    private ArrayList<Materia> correlativas;
+    private HashMap<String, Materia> correlativas;
     private boolean puede = true;
 
     
@@ -27,15 +28,15 @@ public class Materia {
     this.setNombre(unNombre);
     this.setNivel(unNivel);
     this.setCodigo(unCodigo);
-    this.correlativas = new ArrayList();
+    this.correlativas  = new HashMap<>();
     }
     
-    public ArrayList<Materia> getCorrelativas(){
+    public HashMap<String, Materia> getCorrelativas(){
         return this.correlativas;
     }
     
-    public void AgregarCorrelativa(Materia unaMat){
-        this.correlativas.add(unaMat);
+    public void AgregarCorrelativa(String k, Materia v){
+        this.correlativas.put(k, v);
     }
     
     public int getId() {
@@ -74,8 +75,8 @@ public class Materia {
         this.estado = estado;
     }
 
-    public void setCorrelativas(ArrayList<Materia> correlativas) {
-        this.correlativas = correlativas;
+    public void setCorrelativas( HashMap<String, Materia> correlat) {
+        this.correlativas = correlat;
     }
 
     public boolean isPuede() {

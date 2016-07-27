@@ -5,10 +5,14 @@
  */
 package com.mycompany.seguidordecarrera.panels;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mycompany.seguidordecarrera.Materia;
 import com.mycompany.seguidordecarrera.Seguidor;
+import java.io.BufferedReader;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.swing.table.DefaultTableModel;
@@ -19,18 +23,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class matModifPanel extends javax.swing.JFrame {
 
-    ArrayList<Materia> newCorrelat = new ArrayList();
+    HashMap<String, Materia> newCorrelat = new HashMap();
     ArrayList<Materia> mats = new ArrayList();
     Materia matActual;
     AdminPanel admPanel;
-    
-    
 
     public matModifPanel() {
         initComponents();
         agregarRadioButtons();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
+
     }
 
     /**
@@ -66,6 +69,11 @@ public class matModifPanel extends javax.swing.JFrame {
         lbNommat.setText("jLabel1");
 
         cbCorrelativas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
+        cbCorrelativas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCorrelativasActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Correlativa:");
 
@@ -81,7 +89,7 @@ public class matModifPanel extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nivel", "Materia", "Codigo"
+                "Nivel", "Materia", "Codigo", "Cond. Cursada"
             }
         ));
         jScrollPane1.setViewportView(tbCorrelativas);
@@ -219,14 +227,39 @@ public class matModifPanel extends javax.swing.JFrame {
         cbModNivel.setSelectedItem(unaMat.getNivel());
         cbCorrelativas.setSelectedItem("Seleccione una Correlativa");
         mats = unPanel.getMatList();
+        cargarTablaCorrelat();
         Materia element;
         Iterator<Materia> it = mats.iterator();
         while (it.hasNext()) {
             element = it.next();
-            cbCorrelativas.addItem(element.getNombre());
+            if (element.getNombre() != this.matActual.getNombre()) {
+                cbCorrelativas.addItem(element.getNombre());
+            }
         }
 
     }
+
+    public void llenarTablaCorrelat(String key, Materia unaMat) {
+        DefaultTableModel tbAdmin = (DefaultTableModel) tbCorrelativas.getModel();
+        String[] fila = new String[4];
+        fila[0] = (unaMat.getNivel()) + "";
+        fila[1] = unaMat.getNombre();
+        fila[2] = unaMat.getCodigo();
+        fila[3] = key;
+        tbAdmin.addRow(fila);
+
+    }
+
+    public void cargarTablaCorrelat() {
+
+        try {
+            HashMap<String, Materia> hashMts = this.matActual.getCorrelativas();
+            hashMts.entrySet().stream().forEach(m -> this.llenarTablaCorrelat(m.getKey(), m.getValue()));
+        } catch (Exception e) {
+        }
+
+    }
+
 
     private void rbFirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFirmaActionPerformed
         // TODO add your handling code here:
@@ -237,8 +270,8 @@ public class matModifPanel extends javax.swing.JFrame {
             matActual.setCodigo(txtModCodigo.getText());
             matActual.setNombre(txtModNombre.getText());
             matActual.setNivel(cbModNivel.getSelectedItem().toString());
-            if(this.newCorrelat != null){
-            newCorrelat.stream().forEach(m->matActual.AgregarCorrelativa(m));     
+            if (!this.newCorrelat.isEmpty()) {
+                this.newCorrelat.entrySet().stream().forEach(m -> matActual.AgregarCorrelativa(m.getKey(), m.getValue()));
             }
             admPanel.actualizarTabla(matActual);
             dispose();
@@ -246,31 +279,45 @@ public class matModifPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModGuardarActionPerformed
 
     private void btnModCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModCerrarActionPerformed
-
+        dispose();
     }//GEN-LAST:event_btnModCerrarActionPerformed
 
     private void btnAddCorrelativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCorrelativaActionPerformed
-       DefaultTableModel tbAux = (DefaultTableModel) tbCorrelativas.getModel();
-       Materia element;
-       Iterator<Materia> it = mats.iterator();
-       while(it.hasNext()){
-           element = it.next();
-           ArrayList<Materia> correlat = element.getCorrelativas();
-           if(element.getNombre() == cbCorrelativas.getSelectedItem().toString()){
-              if((this.newCorrelat.stream().filter(c->c.getNombre() == cbCorrelativas.getSelectedItem().toString()).collect(Collectors.toList())).size() > 0 || (correlat.stream().filter(c->c.getNombre() == cbCorrelativas.getSelectedItem().toString()).collect(Collectors.toList())).size() > 0 ){
-                   Seguidor.lanzarAlerta(cbCorrelativas.getSelectedItem().toString() + " ya forma parte de las correlativas de " + this.matActual.getNombre());
-             }else{
-               String[] fila = new String[3];
-               fila[0] = element.getCodigo();
-               fila[1] = element.getNombre();
-               fila[2] = element.getNivel();
-               tbAux.addRow(fila);
-               this.newCorrelat.add(element);
-               }
-           }else{}
-       }
-           
+        DefaultTableModel tbAux = (DefaultTableModel) tbCorrelativas.getModel();
+        Materia element;
+        String cond = "";
+        Iterator<Materia> it = mats.iterator();
+        while (it.hasNext()) {
+            element = it.next();
+            HashMap<String, Materia> correlat = element.getCorrelativas();
+            if (element.getNombre() == cbCorrelativas.getSelectedItem().toString()) {
+                if ((this.newCorrelat.entrySet().stream().filter(c -> c.getValue().getNombre() == cbCorrelativas.getSelectedItem().toString()).collect(Collectors.toList())).size() > 0 || (correlat.entrySet().stream().filter(c -> c.getValue().getNombre() == cbCorrelativas.getSelectedItem().toString()).collect(Collectors.toList())).size() > 0) {
+                    Seguidor.lanzarAlerta(cbCorrelativas.getSelectedItem().toString() + " ya forma parte de las correlativas de " + this.matActual.getNombre());
+                } else {
+                    if (rbFirma.isSelected()) {
+                        this.newCorrelat.put("F", element);
+                        cond = "F";
+                    } else if (rbAprob.isSelected()) {
+                        this.newCorrelat.put("A", element);
+                        cond = "A";
+                    }
+                    String[] fila = new String[4];
+                    fila[0] = element.getCodigo();
+                    fila[1] = element.getNombre();
+                    fila[2] = element.getNivel();
+
+                    tbAux.addRow(fila);
+
+                }
+            } else {
+            }
+        }
+
     }//GEN-LAST:event_btnAddCorrelativaActionPerformed
+
+    private void cbCorrelativasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCorrelativasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCorrelativasActionPerformed
 
     public void agregarRadioButtons() {
         gbModPanel.add(rbFirma);

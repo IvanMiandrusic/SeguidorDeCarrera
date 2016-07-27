@@ -19,6 +19,7 @@ import com.mycompany.seguidordecarrera.Seguidor;
 import com.mycompany.seguidordecarrera.Seguidor;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
 import java.util.List;
@@ -29,6 +30,7 @@ import java.util.List;
  */
 public class AdminPanel extends javax.swing.JFrame {
 
+  
     ArrayList<Materia> materias = new ArrayList();
     File fichero = new File("Datos\\datos.json");
     Materia materia;
@@ -55,12 +57,13 @@ public class AdminPanel extends javax.swing.JFrame {
         txtNombreMat = new javax.swing.JTextField();
         btnCrearMat = new javax.swing.JButton();
         btnModMat = new javax.swing.JButton();
-        btnCerrarAdmin = new javax.swing.JButton();
         cbNivelMat = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMatAdmin = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         txtCodigoMat = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        btnGuardarAdmin = new javax.swing.JButton();
 
         jRadioButton1.setText("jRadioButton1");
 
@@ -91,13 +94,6 @@ public class AdminPanel extends javax.swing.JFrame {
         btnModMat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModMatActionPerformed(evt);
-            }
-        });
-
-        btnCerrarAdmin.setText("Cerrar");
-        btnCerrarAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarAdminActionPerformed(evt);
             }
         });
 
@@ -134,11 +130,8 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(btnModMat)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCerrarAdmin))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnModMat)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
@@ -171,52 +164,76 @@ public class AdminPanel extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtCodigoMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModMat)
-                    .addComponent(btnCerrarAdmin))
+                .addComponent(btnModMat)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton1.setText("Cerrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnGuardarAdmin.setText("Guardar");
+        btnGuardarAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarAdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnGuardarAdmin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(btnGuardarAdmin))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void actualizarTabla(Materia unamat){
+    public void actualizarTabla(Materia unamat) {
         DefaultTableModel tbAdmin = (DefaultTableModel) tbMatAdmin.getModel();
-         String[] fila = new String[4];
-                fila[0] = unamat.getId() + "";
-                fila[1] = unamat.getCodigo();
-                fila[2] = unamat.getNombre();
-                fila[3] = unamat.getNivel() + "";
-                int selectedRow = tbMatAdmin.getSelectedRow();
-                tbAdmin.setValueAt( unamat.getCodigo() ,selectedRow , 1);
-                tbAdmin.setValueAt( unamat.getNombre(),selectedRow , 2);
-                tbAdmin.setValueAt( unamat.getNivel(),selectedRow , 3);
-          
+        String[] fila = new String[4];
+        fila[0] = unamat.getId() + "";
+        fila[1] = unamat.getCodigo();
+        fila[2] = unamat.getNombre();
+        fila[3] = unamat.getNivel() + "";
+        int selectedRow = tbMatAdmin.getSelectedRow();
+        tbAdmin.setValueAt(unamat.getCodigo(), selectedRow, 1);
+        tbAdmin.setValueAt(unamat.getNombre(), selectedRow, 2);
+        tbAdmin.setValueAt(unamat.getNivel(), selectedRow, 3);
+
     }
-    
-    public ArrayList<Materia> getMatList(){
+
+    public ArrayList<Materia> getMatList() {
         return this.materias;
     }
-   
+
     public void leerMaterias() {
 
         try {
@@ -232,7 +249,7 @@ public class AdminPanel extends javax.swing.JFrame {
                 fila[3] = (mats[i].getNivel()) + "";
                 tbAdmin.addRow(fila);
                 this.agregarMat(mats[i]);
-          
+
             }
 
         } catch (Exception e) {
@@ -247,7 +264,7 @@ public class AdminPanel extends javax.swing.JFrame {
             Iterator<Materia> it = materias.iterator();
             Materia element;
             if (this.materias == null) {
-             
+
             } else {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 String s = gson.toJson(materias);
@@ -259,8 +276,8 @@ public class AdminPanel extends javax.swing.JFrame {
         }
 
     }
-    
-    public void agregarMat(Materia unaMat){
+
+    public void agregarMat(Materia unaMat) {
         this.materias.add(unaMat);
     }
 
@@ -301,7 +318,7 @@ public class AdminPanel extends javax.swing.JFrame {
                     }
                     mat.setId(materias.size() + 1);
                     this.agregarMat(mat);
-                    fila[0] = mat.getId()+"";
+                    fila[0] = mat.getId() + "";
                     tbAdmin.addRow(fila);
 
                 }
@@ -315,10 +332,10 @@ public class AdminPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbNivelMatActionPerformed
 
-    private void btnCerrarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarAdminActionPerformed
+    private void btnGuardarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarAdminActionPerformed
         this.guardarMateria(materias);
         dispose();
-    }//GEN-LAST:event_btnCerrarAdminActionPerformed
+    }//GEN-LAST:event_btnGuardarAdminActionPerformed
 
     private void txtNombreMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreMatActionPerformed
         // TODO add your handling code here:
@@ -329,25 +346,32 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoMatActionPerformed
 
     private void btnModMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModMatActionPerformed
-        int selectedRow = tbMatAdmin.getSelectedRow();
-        String codigo = tbMatAdmin.getValueAt(selectedRow, 1).toString();
-        Iterator<Materia> it = materias.iterator();
-        Materia element;
-        while (it.hasNext()) {
-            element = it.next();
-            String codigoAux = element.getCodigo();
-            if (codigoAux.equals(codigo)) {
-                matModifPanel modifPnl = new matModifPanel();
-                modifPnl.datosDeCampos(element, this);
-                modifPnl.setVisible(true);
-                return;
-            } else {
 
+        if (tbMatAdmin.getSelectedRow() == -1) {
+            Seguidor.lanzarAlerta("No se ha seleccionado una Materia para ser Modificada");
+        } else {
+            int selectedRow = tbMatAdmin.getSelectedRow();
+            String codigo = tbMatAdmin.getValueAt(selectedRow, 1).toString();
+            Iterator<Materia> it = materias.iterator();
+            Materia element;
+            while (it.hasNext()) {
+                element = it.next();
+                String codigoAux = element.getCodigo();
+                if (codigoAux.equals(codigo)) {
+                    matModifPanel modifPnl = new matModifPanel();
+                    modifPnl.datosDeCampos(element, this);
+                    modifPnl.setVisible(true);
+                    return;
+                } else {
+
+                }
             }
-
+        }
     }//GEN-LAST:event_btnModMatActionPerformed
-    }
-    
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -394,10 +418,11 @@ public class AdminPanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCerrarAdmin;
     private javax.swing.JButton btnCrearMat;
+    private javax.swing.JButton btnGuardarAdmin;
     private javax.swing.JButton btnModMat;
     private javax.swing.JComboBox<String> cbNivelMat;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
