@@ -7,7 +7,10 @@ package com.mycompany.seguidordecarrera;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 
 /**
@@ -20,24 +23,36 @@ public class Materia {
     private String nivel;
     private String notas[] = new String[7];
     private int estado = 0;
-    private HashMap<String, Materia> correlativas;
+    private LinkedList<Correlativa> correlativas;
     private boolean puede = true;
+    private String codigo;
 
     
     public Materia(String unCodigo, String unNombre, String unNivel) {
     this.setNombre(unNombre);
     this.setNivel(unNivel);
     this.setCodigo(unCodigo);
-    this.correlativas  = new HashMap<>();
+    this.correlativas = new LinkedList<>();
+    
+  
     }
     
-    public HashMap<String, Materia> getCorrelativas(){
+    public LinkedList getCorrelativas(){
         return this.correlativas;
     }
     
-    public void AgregarCorrelativa(String k, Materia v){
-        this.correlativas.put(k, v);
+    public void AgregarCorrelativa(Correlativa m){
+        this.correlativas.add(m);
     }
+    
+    
+    public void eliminarCorrelativas(Materia aMat){
+        Correlativa aEliminar = this.correlativas.stream().filter(c -> (c.getMateria().getCodigo()).equals(aMat.getCodigo())).findFirst().get();
+        this.correlativas.remove(aEliminar);
+        this.correlativas.stream().forEach(c->System.out.print(c.mat.nombre));
+        
+    }
+    
     
     public int getId() {
         return id;
@@ -75,7 +90,7 @@ public class Materia {
         this.estado = estado;
     }
 
-    public void setCorrelativas( HashMap<String, Materia> correlat) {
+    public void setCorrelativas( LinkedList correlat) {
         this.correlativas = correlat;
     }
 
@@ -86,8 +101,6 @@ public class Materia {
     public void setPuede(boolean puede) {
         this.puede = puede;
     }
-
-    private String codigo;
 
     public String getCodigo() {
         return codigo;

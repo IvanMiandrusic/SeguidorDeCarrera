@@ -30,7 +30,6 @@ import java.util.List;
  */
 public class AdminPanel extends javax.swing.JFrame {
 
-  
     ArrayList<Materia> materias = new ArrayList();
     File fichero = new File("Datos\\datos.json");
     Materia materia;
@@ -370,7 +369,8 @@ public class AdminPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModMatActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       dispose();
+        Seguidor.lanzarAlerta("Los Cambios no se Guardaran");
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
