@@ -7,6 +7,7 @@ package com.mycompany.seguidordecarrera;
 
 import com.mycompany.seguidordecarrera.panels.ModificarEnCursoPanel;
 import com.mycompany.seguidordecarrera.panels.AdminPanel;
+import com.mycompany.seguidordecarrera.panels.DetallesCursada;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,10 +17,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Resumen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ventana
-     */
+    AdminPanel admin = new AdminPanel();
+    Alumno alumno = new Alumno();
+    
     public Resumen() {
+        
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -77,6 +79,11 @@ public class Resumen extends javax.swing.JFrame {
         nroFinalesPend_Lb.setText("Finales Pendientes: ");
 
         jButton1.setText("Detalles");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -235,13 +242,19 @@ public class Resumen extends javax.swing.JFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
         ModificarEnCursoPanel nuevo = new ModificarEnCursoPanel();
+        nuevo.datosDeCampo(this.admin, alumno);
         nuevo.setVisible(true);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        AdminPanel admin = new AdminPanel();
-        admin.setVisible(true);
+
+        this.admin.setVisible(true);
     }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DetallesCursada panel = new DetallesCursada();
+        panel.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

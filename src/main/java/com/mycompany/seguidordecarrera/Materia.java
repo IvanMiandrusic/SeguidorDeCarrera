@@ -53,6 +53,14 @@ public class Materia {
         
     }
     
+    public boolean tieneCorrelativas(){
+        if(this.correlativas.size()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     
     public int getId() {
         return id;

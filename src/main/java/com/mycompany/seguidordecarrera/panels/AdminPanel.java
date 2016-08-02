@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -31,7 +32,7 @@ import java.util.List;
 public class AdminPanel extends javax.swing.JFrame {
 
     ArrayList<Materia> materias = new ArrayList();
-    File fichero = new File("Datos\\datos.json");
+    File fichero = new File("Datos\\materias.json");
     Materia materia;
     String datos[];
 
@@ -284,7 +285,7 @@ public class AdminPanel extends javax.swing.JFrame {
     private void btnCrearMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearMatActionPerformed
         if (txtNombreMat.getText().equals("") || txtCodigoMat.getText().equals("")) {
             Seguidor.lanzarAlerta("Las Materias deben tener un Nombre y un Codigo.");
-        } else {
+        } else if(this.controlarCodigo(txtCodigoMat.getText())){
             try {
                 DefaultTableModel tbAdmin = (DefaultTableModel) tbMatAdmin.getModel();
                 String nivel = (cbNivelMat.getSelectedItem().toString());
@@ -324,9 +325,19 @@ public class AdminPanel extends javax.swing.JFrame {
             } catch (Exception e) {
             }
 
+        }else{
+            Seguidor.lanzarAlerta("El codigo de Materia ya existe");
         }
     }//GEN-LAST:event_btnCrearMatActionPerformed
 
+    private boolean controlarCodigo(String unCodigo){
+        if(this.materias.stream().filter(m->m.getCodigo().equals(unCodigo)).collect(Collectors.toList()).size()>0){
+         return false;   
+        }else{
+            return true;
+        }
+    }
+    
     private void cbNivelMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNivelMatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbNivelMatActionPerformed

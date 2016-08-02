@@ -112,7 +112,7 @@ public class matModifPanel extends javax.swing.JFrame {
             }
         });
 
-        btnModGuardar.setText("Aceptar");
+        btnModGuardar.setText("Guardar");
         btnModGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModGuardarActionPerformed(evt);
@@ -148,37 +148,38 @@ public class matModifPanel extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbCorrelativas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtModNombre)
-                            .addComponent(txtModCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(cbModNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbCorrelativas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtModNombre)
+                                    .addComponent(txtModCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                    .addComponent(cbModNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addComponent(rbFirma)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rbAprob)
-                                .addGap(22, 22, 22)
-                                .addComponent(btnAddCorrelativa))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbNombre)
-                                .addGap(84, 84, 84))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnModGuardar)
-                        .addGap(130, 130, 130)
-                        .addComponent(btnEliminarCorr)
-                        .addGap(121, 121, 121)
-                        .addComponent(btnModCerrar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(rbAprob)
+                                        .addGap(22, 22, 22)
+                                        .addComponent(btnAddCorrelativa))
+                                    .addComponent(lbNombre)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnModGuardar)
+                                .addGap(130, 130, 130)
+                                .addComponent(btnEliminarCorr)
+                                .addGap(121, 121, 121)
+                                .addComponent(btnModCerrar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,18 +214,24 @@ public class matModifPanel extends javax.swing.JFrame {
                     .addComponent(btnEliminarCorr)
                     .addComponent(btnModCerrar)
                     .addComponent(btnModGuardar))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,6 +260,8 @@ public class matModifPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModCerrarActionPerformed
 
     private void btnAddCorrelativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCorrelativaActionPerformed
+
+if(rbFirma.isSelected() || rbAprob.isSelected()){
         DefaultTableModel tbAux = (DefaultTableModel) tbCorrelativas.getModel();
         Materia element;
         Correlativa newCorrelat = new Correlativa();
@@ -262,7 +271,7 @@ public class matModifPanel extends javax.swing.JFrame {
         while (it.hasNext()) {
             element = it.next();
             if (element.getNombre() == cbCorrelativas.getSelectedItem().toString()) {
-                /*TODO: PROBLEMA CON LAS CORRELATIVAS REPETIDAS :/*/ if (((correlat.stream().filter(c -> c.getMateria().getNombre() == cbCorrelativas.getSelectedItem().toString()).collect(Collectors.toList())).size() > 0) || ((this.newCorrelativas.stream().filter(c -> c.getMateria().getNombre() == cbCorrelativas.getSelectedItem().toString()).collect(Collectors.toList())).size() > 0)) {
+                /*TODO: PROBLEMA CON LAS CORRELATIVAS REPETIDAS :/*/ if (((correlat.stream().filter(c -> c.getMateria().getNombre().equals(cbCorrelativas.getSelectedItem().toString())).collect(Collectors.toList())).size() > 0) || ((this.newCorrelativas.stream().filter(c -> c.getMateria().getNombre().equals(cbCorrelativas.getSelectedItem().toString())).collect(Collectors.toList())).size() > 0)) {
                     Seguidor.lanzarAlerta(cbCorrelativas.getSelectedItem().toString() + " ya forma parte de las correlativas de " + this.matActual.getNombre());
                 } else {
                     newCorrelat.setMateria(element);
@@ -288,6 +297,9 @@ public class matModifPanel extends javax.swing.JFrame {
             } else {
             }
         }
+    }else{
+    Seguidor.lanzarAlerta("Debe seleccionar una condicion de Correlativa");
+}
     }//GEN-LAST:event_btnAddCorrelativaActionPerformed
 
     private void cbCorrelativasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCorrelativasActionPerformed
