@@ -7,39 +7,54 @@ package com.mycompany.seguidordecarrera.panels;
 
 import com.mycompany.seguidordecarrera.Alumno;
 import com.mycompany.seguidordecarrera.Materia;
+import com.mycompany.seguidordecarrera.Resumen;
+import com.mycompany.seguidordecarrera.Seguidor;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
  *
  * @author Ivan
  */
-public class ModificarEnCursoPanel extends javax.swing.JFrame {
+public class NuevaEnCursoPanel extends javax.swing.JFrame {
 
     ArrayList<Materia> mats;
+    Alumno alumno;
+    Resumen resumenPanel;
     
-    public ModificarEnCursoPanel() {
+    public NuevaEnCursoPanel() {
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
-    public void datosDeCampo(AdminPanel unAdmin ,Alumno unAlumno){
+    public void datosDeCampo(Resumen unResu, AdminPanel unAdmin ,Alumno unAlumno){
         
         this.mats = unAdmin.getMatList();
+        this.resumenPanel = unResu;
+        this.alumno = unAlumno;
+
         Materia element;
         Iterator<Materia> it = mats.iterator();
         while (it.hasNext()) {
             element = it.next();
+            if(this.alumno.noCursoMateria(element)){
             if(!element.tieneCorrelativas()){
-            cbSelecMat.addItem(element.getNombre());
-            
+            this.cbSelecMat.addItem(element.getNombre());
+            }else if(unAlumno.puedeCursar(element)){
+                this.cbSelecMat.addItem(element.getNombre());
+            } 
             }
+         
+            
         }
     }
     
-    
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -52,7 +67,7 @@ public class ModificarEnCursoPanel extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cbDia1 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbDia2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -80,7 +95,7 @@ public class ModificarEnCursoPanel extends javax.swing.JFrame {
             }
         });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miarcoles", "Jueves", "Viernes", "Sabado"  }));
+        cbDia2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ","Lunes", "Martes", "Miarcoles", "Jueves", "Viernes", "Sabado" }));
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +125,7 @@ public class ModificarEnCursoPanel extends javax.swing.JFrame {
                 .addGroup(pnModificarEnCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cbSelecMat, 0, 215, Short.MAX_VALUE)
                     .addComponent(cbDia1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbDia2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(pnModificarEnCursoLayout.createSequentialGroup()
                 .addComponent(jButton1)
@@ -131,7 +146,7 @@ public class ModificarEnCursoPanel extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnModificarEnCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbDia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(pnModificarEnCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -190,7 +205,31 @@ public class ModificarEnCursoPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        String selected = cbSelecMat.getSelectedItem().toString();
+        if (selected.equals("Seleccione una Materia") ) {
+            Seguidor.lanzarAlerta("No se ha seleccionado una Materia para cursar");
+        }else{
+           Materia aCursar = this.mats.stream().filter(m->m.getNombre().equals(selected)).findFirst().get();
+           String dia1 = this.cbDia1.getSelectedItem().toString();
+           String dia2 = this.cbDia2.getSelectedItem().toString();
+           if(this.alumno.noCursoMateria(aCursar)){
+               
+               if(dia1.equals(dia2)){
+                    Seguidor.lanzarAlerta("Los dias de cursada no deben coincidir");
+                       return;
+               }else{
+                   this.alumno.cursarMateria(aCursar);
+                   this.resumenPanel.nuevaMatTablaEnCurso(aCursar, dia1, dia2);
+                
+               }
+                
+           }else{
+                Seguidor.lanzarAlerta("La Materia seleccionada se encuentra en curso o ah sido cursada anteriormente");
+           }
+           
+          
+           dispose();   
+        }      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -210,14 +249,18 @@ public class ModificarEnCursoPanel extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModificarEnCursoPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevaEnCursoPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModificarEnCursoPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevaEnCursoPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModificarEnCursoPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevaEnCursoPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModificarEnCursoPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevaEnCursoPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -226,17 +269,17 @@ public class ModificarEnCursoPanel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModificarEnCursoPanel().setVisible(true);
+                new NuevaEnCursoPanel().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbDia1;
+    private javax.swing.JComboBox<String> cbDia2;
     private javax.swing.JComboBox<String> cbSelecMat;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

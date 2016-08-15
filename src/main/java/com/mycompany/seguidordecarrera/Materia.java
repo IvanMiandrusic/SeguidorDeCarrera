@@ -7,6 +7,7 @@ package com.mycompany.seguidordecarrera;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,8 +22,8 @@ public class Materia {
     private int id;
     private String nombre;
     private String nivel;
-    private String notas[] = new String[7];
     private int estado = 0;
+    private ArrayList<String> days = new ArrayList(Arrays.asList("-", "-"));
     private LinkedList<Correlativa> correlativas;
     private boolean puede = true;
     private String codigo;
@@ -33,8 +34,12 @@ public class Materia {
     this.setNivel(unNivel);
     this.setCodigo(unCodigo);
     this.correlativas = new LinkedList<>();
+
+    }
     
-  
+    public void agregarDias(String dia1, String dia2){
+        this.days.set(0, dia1);
+        this.days.set(1, dia2);
     }
     
     public LinkedList getCorrelativas(){
@@ -61,6 +66,10 @@ public class Materia {
         }
     }
     
+   
+    
+  
+   
     
     public int getId() {
         return id;
@@ -86,13 +95,7 @@ public class Materia {
         this.nivel = nivel;
     }
 
-    public String[] getNotas() {
-        return notas;
-    }
-
-    public void setNotas(String[] notas) {
-        this.notas = notas;
-    }
+    
 
     public void setEstado(int estado) {
         this.estado = estado;
@@ -118,6 +121,13 @@ public class Materia {
         this.codigo = codigo;
     }
 
-  
+    public String getDia1(){
+       return this.days.get(0);
+    }
+    
+    public String getDia2(){
+       return this.days.get(1);
+    }
+
                        
 }

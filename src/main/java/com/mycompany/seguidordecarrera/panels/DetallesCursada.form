@@ -60,7 +60,7 @@
               </Border>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[700, 2250]"/>
+              <Dimension value="[700, 2550]"/>
             </Property>
           </Properties>
 
@@ -259,6 +259,9 @@
                       <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Pendiente&quot;, &quot;Cursando&quot;, &quot;Firmada&quot;, &quot;Aprobada&quot; })" type="code"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAlgebraActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -1456,6 +1459,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

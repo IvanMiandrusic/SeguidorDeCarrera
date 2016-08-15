@@ -217,12 +217,7 @@ public class AdminPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void actualizarTabla(Materia unamat) {
-        DefaultTableModel tbAdmin = (DefaultTableModel) tbMatAdmin.getModel();
-        String[] fila = new String[4];
-        fila[0] = unamat.getId() + "";
-        fila[1] = unamat.getCodigo();
-        fila[2] = unamat.getNombre();
-        fila[3] = unamat.getNivel() + "";
+        DefaultTableModel tbAdmin = (DefaultTableModel) tbMatAdmin.getModel();     
         int selectedRow = tbMatAdmin.getSelectedRow();
         tbAdmin.setValueAt(unamat.getCodigo(), selectedRow, 1);
         tbAdmin.setValueAt(unamat.getNombre(), selectedRow, 2);
@@ -261,8 +256,6 @@ public class AdminPanel extends javax.swing.JFrame {
         try {
             BufferedWriter bw;//Instancia de BW 
             bw = new BufferedWriter(new FileWriter(fichero));//Inicialización de "BW" con "FW" como parámetro con "fichero" como parámetro
-            Iterator<Materia> it = materias.iterator();
-            Materia element;
             if (this.materias == null) {
 
             } else {
@@ -379,6 +372,20 @@ public class AdminPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnModMatActionPerformed
 
+    public Materia obtenerMateriaPorNombre(String unNombre){
+            Iterator<Materia> it = materias.iterator();
+            Materia element = null;
+            Materia mat;
+            while (it.hasNext()) {
+                element = it.next();
+                String nomAux = element.getNombre();
+                if (nomAux.equals(unNombre)) {
+                    break;
+            }
+       }
+            return element;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Seguidor.lanzarAlerta("Los Cambios no se Guardaran");
         dispose();

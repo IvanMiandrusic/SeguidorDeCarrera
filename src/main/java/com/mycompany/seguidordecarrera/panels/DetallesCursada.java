@@ -143,7 +143,7 @@ public class DetallesCursada extends javax.swing.JFrame {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(6700, 700));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles de Cursada"));
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 2250));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 2550));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Primer Año", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
@@ -164,6 +164,11 @@ public class DetallesCursada extends javax.swing.JFrame {
         jLabel1.setText("Algebra y Geometria Analitica");
 
         cbAlgebra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "Cursando", "Firmada", "Aprobada" }));
+        cbAlgebra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAlgebraActionPerformed(evt);
+            }
+        });
 
         cbAnalisis1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  "Pendiente", "Cursando", "Firmada", "Aprobada" }));
 
@@ -750,6 +755,11 @@ public class DetallesCursada extends javax.swing.JFrame {
         });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -816,9 +826,20 @@ public class DetallesCursada extends javax.swing.JFrame {
        dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void cbAlgebraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlgebraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAlgebraActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       
+        //Todo--------------------------------------------------------------
+      
+        dispose();
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
