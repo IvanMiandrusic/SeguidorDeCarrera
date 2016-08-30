@@ -9,7 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.mycompany.seguidordecarrera.Alumno;
 import com.mycompany.seguidordecarrera.Materia;
+import com.mycompany.seguidordecarrera.Resumen;
 import java.io.*;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -34,11 +36,15 @@ public class AdminPanel extends javax.swing.JFrame {
     ArrayList<Materia> materias = new ArrayList();
     File fichero = new File("Datos\\materias.json");
     Materia materia;
+    Alumno elAlumno;
     String datos[];
+    Resumen resuPanel;
+    DefaultTableModel tbAdmin;
 
-    public AdminPanel() {
+    public AdminPanel(Resumen panel) {
         initComponents();
         leerMaterias();
+        this.resuPanel = panel;
         setLocationRelativeTo(null);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
 
@@ -64,6 +70,7 @@ public class AdminPanel extends javax.swing.JFrame {
         txtCodigoMat = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnGuardarAdmin = new javax.swing.JButton();
+        btnDeleteMat = new javax.swing.JButton();
 
         jRadioButton1.setText("jRadioButton1");
 
@@ -184,6 +191,13 @@ public class AdminPanel extends javax.swing.JFrame {
             }
         });
 
+        btnDeleteMat.setText("Eliminar Mat");
+        btnDeleteMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteMatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,6 +208,8 @@ public class AdminPanel extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(btnGuardarAdmin)
+                        .addGap(131, 131, 131)
+                        .addComponent(btnDeleteMat)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(24, 24, 24))
@@ -209,7 +225,8 @@ public class AdminPanel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(btnGuardarAdmin))
+                    .addComponent(btnGuardarAdmin)
+                    .addComponent(btnDeleteMat))
                 .addContainerGap())
         );
 
@@ -235,7 +252,7 @@ public class AdminPanel extends javax.swing.JFrame {
             BufferedReader reader = new BufferedReader(new FileReader(fichero));
             Gson gson = new GsonBuilder().create();
             Materia[] mats = gson.fromJson(reader, Materia[].class);
-            DefaultTableModel tbAdmin = (DefaultTableModel) tbMatAdmin.getModel();
+            this.tbAdmin = (DefaultTableModel) tbMatAdmin.getModel();
             for (int i = 0; mats[i] != null; i++) {
                 String[] fila = new String[4];
                 fila[0] = mats[i].getId() + "";
@@ -385,11 +402,42 @@ public class AdminPanel extends javax.swing.JFrame {
        }
             return element;
     }
+
+    public Alumno getElAlumno() {
+        return elAlumno;
+    }
+
+    public void setElAlumno(Alumno elAlumno) {
+        this.elAlumno = elAlumno;
+    }
+    
+    
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Seguidor.lanzarAlerta("Los Cambios no se Guardaran");
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void removeMat(String codigo){
+        this.materias.removeIf(m->m.getCodigo().equals(codigo));
+    }
+    
+    private void btnDeleteMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteMatActionPerformed
+        if(this.tbMatAdmin.getSelectedRow() == 1){
+            Seguidor.lanzarAlerta("Debe seleccionar una materia para eliminar");
+        }else{
+            int selectedRow = tbMatAdmin.getSelectedRow();
+            String nombre = tbMatAdmin.getValueAt(selectedRow, 2).toString();
+            String codigo = tbMatAdmin.getValueAt(selectedRow, 1).toString();
+            this.removeMat(codigo);
+            this.tbAdmin.removeRow(selectedRow);
+            this.elAlumno.eliminarMateria(codigo);
+            
+            this.resuPanel.actualizarTablas(nombre);
+            Seguidor.lanzarAlerta("La materia se a eliminado exitosamente");
+
+        }
+    }//GEN-LAST:event_btnDeleteMatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,14 +477,15 @@ public class AdminPanel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AdminPanel admin = new AdminPanel();
-                admin.setVisible(true);
+                
+            
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearMat;
+    private javax.swing.JButton btnDeleteMat;
     private javax.swing.JButton btnGuardarAdmin;
     private javax.swing.JButton btnModMat;
     private javax.swing.JComboBox<String> cbNivelMat;

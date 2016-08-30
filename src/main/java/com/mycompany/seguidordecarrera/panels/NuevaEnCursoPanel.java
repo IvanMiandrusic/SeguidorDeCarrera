@@ -227,7 +227,7 @@ public class NuevaEnCursoPanel extends javax.swing.JFrame {
                 Seguidor.lanzarAlerta("La Materia seleccionada se encuentra en curso o ah sido cursada anteriormente");
            }
            
-          
+          this.resumenPanel.cargarEstadisticas();
            dispose();   
         }      
     }//GEN-LAST:event_jButton1ActionPerformed

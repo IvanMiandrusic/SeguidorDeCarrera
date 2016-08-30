@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.seguidordecarrera;
 
 import java.util.ArrayList;
@@ -13,8 +9,8 @@ import java.util.Arrays;
  * @author Ivan
  */
 public class NotasMateria {
-
-    private ArrayList<String> notas = new ArrayList(Arrays.asList("0", "0", "0", "0", "0", "0", "0"));
+    
+    private ArrayList<String> notas = new ArrayList(Arrays.asList("0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"));
     Materia materia;
 
 
@@ -35,6 +31,11 @@ public class NotasMateria {
         return (Integer.parseInt(this.notas.get(6)) > 3);
     }
 
+     public boolean aproboFinales() {
+        return (Integer.parseInt(this.notas.get(7)) > 3 || Integer.parseInt(this.notas.get(8)) > 3 || Integer.parseInt(this.notas.get(9)) > 3 || Integer.parseInt(this.notas.get(10)) > 3);
+    }
+
+    
     public void actualizar(ArrayList<String> nuevas) {
         this.notas = nuevas;
     }

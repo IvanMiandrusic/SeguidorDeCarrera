@@ -28,28 +28,16 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="btnNuevo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnModif" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnFirma" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnAdmin" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnCerrar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="733" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,11 +50,8 @@
               <Component id="jScrollPane1" min="-2" pref="154" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnModif" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnFirma" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -90,55 +75,103 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="firmadas_Lb" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="aprobadas_Lb" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="enCurso_Lb" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="firmaLb" min="-2" max="-2" attributes="0"/>
+                                      <Component id="enCursoLb" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lbEnCurso" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbFirmadas" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                  <Component id="aprobLB" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="lbAprobadas" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="porcentajeFirmadas_Lb" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="porcentajeAprobadas_Lb" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="nroFinalesPend_Lb" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="porcFirmLb" min="-2" max="-2" attributes="0"/>
+                              <Component id="porcAprobLb" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              <Component id="promedioGral_Lb" min="-2" max="-2" attributes="0"/>
-                              <Component id="promedioB_Lb" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbPorcentajeAprob" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbProcentajeFirmadas" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="promGralLb" min="-2" max="-2" attributes="0"/>
+                              <Component id="promBuenoLb" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbPromedioBueno" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lbPromedioGral" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="133" max="32767" attributes="0"/>
+                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="67" pref="302" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="btnFirma" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnModif" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnNuevo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="cbTabla" min="-2" pref="159" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="firmadas_Lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="porcentajeFirmadas_Lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="promedioGral_Lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="aprobadas_Lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="porcentajeAprobadas_Lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="promedioB_Lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="enCurso_Lb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="nroFinalesPend_Lb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="firmaLb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="porcFirmLb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="promGralLb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbFirmadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbProcentajeFirmadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPromedioGral" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="aprobLB" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="porcAprobLb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="promBuenoLb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbAprobadas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPorcentajeAprob" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPromedioBueno" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="enCursoLb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbEnCurso" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="9" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbTabla" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnModif" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnFirma" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -149,45 +182,88 @@
             <Property name="text" type="java.lang.String" value="Materias Totales: 43"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="firmadas_Lb">
+        <Component class="javax.swing.JLabel" name="firmaLb">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Firmadas: "/>
+            <Property name="text" type="java.lang.String" value="Finales Pend:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="aprobadas_Lb">
+        <Component class="javax.swing.JLabel" name="aprobLB">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Aprobadas: "/>
+            <Property name="text" type="java.lang.String" value="Aprobadas:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="enCurso_Lb">
+        <Component class="javax.swing.JLabel" name="enCursoLb">
           <Properties>
-            <Property name="text" type="java.lang.String" value="En Curso: "/>
+            <Property name="text" type="java.lang.String" value="En Curso:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="porcentajeFirmadas_Lb">
+        <Component class="javax.swing.JLabel" name="porcFirmLb">
           <Properties>
             <Property name="text" type="java.lang.String" value="% Firmadas: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="porcentajeAprobadas_Lb">
+        <Component class="javax.swing.JLabel" name="porcAprobLb">
           <Properties>
             <Property name="text" type="java.lang.String" value="% Aprobadas: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="promedioGral_Lb">
+        <Component class="javax.swing.JLabel" name="promGralLb">
           <Properties>
             <Property name="text" type="java.lang.String" value="Promedio Gral: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="promedioB_Lb">
+        <Component class="javax.swing.JLabel" name="promBuenoLb">
           <Properties>
             <Property name="text" type="java.lang.String" value="Promedio &quot;Bueno&quot;: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="nroFinalesPend_Lb">
+        <Component class="javax.swing.JLabel" name="lbFirmadas">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Finales Pendientes: "/>
+            <Property name="text" type="java.lang.String" value="-"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbAprobadas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="-"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbEnCurso">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="-"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbProcentajeFirmadas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="-"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbPorcentajeAprob">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="-"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbPromedioGral">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="-"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbPromedioBueno">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="-"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbTabla">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;En Curso&quot;, &quot;Finales Pend.&quot;, &quot;Aprobadas&quot; })" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTablaActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
@@ -195,6 +271,30 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnNuevo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nueva"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnModif">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modificar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnFirma">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Firmar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirmaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -208,19 +308,8 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="tbEnCurso">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="10" rowCount="0">
-                <Column editable="false" title="Materia" type="java.lang.String"/>
-                <Column editable="false" title="Dia 1" type="java.lang.Short"/>
-                <Column editable="false" title="Dia 2" type="java.lang.Short"/>
-                <Column editable="false" title="1er Parcial" type="java.lang.Integer"/>
-                <Column editable="false" title="2do Parcial" type="java.lang.Integer"/>
-                <Column editable="false" title="1er Recu (P.P.)" type="java.lang.Integer"/>
-                <Column editable="false" title="2do Recu (P.P)" type="java.lang.Integer"/>
-                <Column editable="false" title="1er Recu (S.P.)" type="java.lang.Integer"/>
-                <Column editable="false" title="2do Recu (S.P.)" type="java.lang.Integer"/>
-                <Column editable="false" title="TP" type="java.lang.Integer"/>
-              </Table>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;Materia&quot;, &quot;Dia 1&quot;, &quot;Dia 2&quot;, &quot;1er Parcial&quot;, &quot;2do Parcial&quot;, &quot;1er Recu (P.P.)&quot;, &quot;2do Recu (P.P)&quot;, &quot;1er Recu (S.P.)&quot;, &quot;2do Recu (S.P.)&quot;, &quot;TP&quot;&#xa;    }&#xa;) {&#xa;    Class[] types = new Class [] {&#xa;        java.lang.String.class, java.lang.Short.class, java.lang.Short.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class&#xa;    };&#xa;    boolean[] canEdit = new boolean [] {&#xa;        false, false, false, false, false, false, false, false, false, false&#xa;    };&#xa;&#xa;    public Class getColumnClass(int columnIndex) {&#xa;        return types [columnIndex];&#xa;    }&#xa;&#xa;    public boolean isCellEditable(int rowIndex, int columnIndex) {&#xa;        return canEdit [columnIndex];&#xa;    }&#xa;}" type="code"/>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
@@ -283,14 +372,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnNuevo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nueva"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
@@ -299,28 +380,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnModif">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Modificar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnCerrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cerrar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnFirma">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Firmada"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirmaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAdmin">
